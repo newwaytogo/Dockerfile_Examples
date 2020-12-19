@@ -4,7 +4,7 @@
 # build server image based on ubuntu 18.04
 FROM ubuntu:18.04
 # update ubuntu and install OpenSSH server
-RUN apt-get update && apt-get install -y openssh-Server
+RUN apt-get update && apt-get install -y openssh-server
 # make a directory for OpenSSH server 
 RUN mkdir /var/run/sshd
 # set up root account password
