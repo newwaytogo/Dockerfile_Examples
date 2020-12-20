@@ -3,7 +3,7 @@
 
 # build server image based on jre8
 FROM java:8-jre
-# update and install Tomcat server 9 (stable version)
+# update and install Tomcat server 8 (stable version)
 RUN apt-get update && apt-get install -y tomcat8
 
 # open port 8080
