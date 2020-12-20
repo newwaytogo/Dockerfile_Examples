@@ -1,8 +1,10 @@
 # MySQL
-FROM ubuntu:18.04
-# MAINTAINER leafney "babycoolzx@126.com"
+# version 0.0.1
 
-RUN echo "deb http://repo.mysql.com/apt/ubuntu/ bionic mysql-5.7" >> /etc/apt/sources.list \
+# build image based on debian jessie
+FROM debian:jessie
+
+RUN echo "deb http://repo.mysql.com/apt/debian/ jessie mysql-5.7" >> /etc/apt/sources.list \
     && apt-key adv --keyserver ha.pool.sks-keyservers.net --recv-keys A4A9406876FCBD3C456770C88C718D3B5072E1F5
 RUN echo "mysql-server mysql-server/root_password password root" | debconf-set-selections
 RUN echo "mysql-server mysql-server/root_password_again password root" | debconf-set-selections
