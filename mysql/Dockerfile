@@ -6,12 +6,12 @@ FROM ubuntu:18.04
 # add account
 RUN groupadd -r mysql && useradd -r -g mysql mysql
 # apt update and install wget
-RUN apt update && apt install -y wget
+RUN apt-get update && apt-get install -y wget
 # add the MySQL APT repository for 
 RUN wget https://dev.mysql.com/get/mysql-apt-config_0.8.16-1_all.deb
 # Verifying the MD5 checksum
 RUN echo 'f6a7c41f04cc4fea7ade285092eea77a mysql-apt-config_0.8.16-1_all.deb' > file && md5sum -c file \
-    && apt update && apt install -y --no-install-recommends perl pwgen
+    && apt-get update && apt-get install -y --no-install-recommends perl pwgen
 # set the debconf variables and then install MySQL noninteractively
 RUN debconf-set-selections <<< "mysql-community-server mysql-community-server/root-pass password mypassword" \
     && debconf-set-selections <<< "mysql-community-server mysql-community-server/re-root-pass password mypassword" \
