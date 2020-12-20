@@ -1,22 +1,32 @@
-## MySQL 5.7 with Percona Xtrabackup
- 
-## Pull the mysql:5.7 image
-FROM mysql:5.7
- 
-## List all packages that we want to install
-ENV PACKAGE percona-xtrabackup-23
- 
-# Install requirement (wget)
-RUN apt-get update && apt-get install -y wget
- 
-# Install Percona apt repository and Percona Xtrabackup
-RUN wget https://repo.percona.com/apt/percona-release_0.1-3.jessie_all.deb && \
-    dpkg -i percona-release_0.1-3.jessie_all.deb && \
-    apt-get update && \
-    apt-get install -y $PACKAGE
- 
-# Create the backup destination
-RUN mkdir -p /backup/xtrabackups
- 
-# Allow mountable backup path
-VOLUME ["/backup/xtrabackup"]
+# MySQL
+FROM ubuntu:18.04
+# MAINTAINER leafney "babycoolzx@126.com"
+
+RUN echo "deb http://cn.archive.ubuntu.com/ubuntu/ bionic main restricted universe multiverse" >> /etc/apt/sources.list \
+RUN echo "mysql-server mysql-server/root_password password root" | debconf-set-selections
+RUN echo "mysql-server mysql-server/root_password_again password root" | debconf-set-selections
+
+RUN apt-get update && \
+	apt-get -y install mysql-server-5.7 && \
+	mkdir -p /var/lib/mysql && \
+	mkdir -p /var/run/mysqld && \
+	mkdir -p /var/log/mysql && \
+	chown -R mysql:mysql /var/lib/mysql && \
+	chown -R mysql:mysql /var/run/mysqld && \
+	chown -R mysql:mysql /var/log/mysql
+
+# UTF-8 and bind-address
+RUN sed -i -e "$ a [client]\n\n[mysql]\n\n[mysqld]"  /etc/mysql/my.cnf && \
+	sed -i -e "s/\(\[client\]\)/\1\ndefault-character-set = utf8/g" /etc/mysql/my.cnf && \
+	sed -i -e "s/\(\[mysql\]\)/\1\ndefault-character-set = utf8/g" /etc/mysql/my.cnf && \
+	sed -i -e "s/\(\[mysqld\]\)/\1\ninit_connect='SET NAMES utf8'\ncharacter-set-server = utf8\ncollation-server=utf8_unicode_ci\nbind-address = 0.0.0.0/g" /etc/mysql/my.cnf
+
+VOLUME /var/lib/mysql
+
+COPY ./startup.sh /root/startup.sh
+RUN chmod +x /root/startup.sh
+
+ENTRYPOINT ["/root/startup.sh"]
+
+EXPOSE 3306
+CMD ["/usr/bin/mysqld_safe"]
