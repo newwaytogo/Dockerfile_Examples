@@ -1,7 +1,7 @@
 # MySQL
 # version 0.0.1
 
-# build image based on ubuntu 18.04
+# build image based on debian jessie
 FROM debian:jessie
 # add account
 RUN groupadd -r mysql && useradd -r -g mysql mysql
