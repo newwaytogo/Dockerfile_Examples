@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y apt-utils wget
 # add the MySQL APT repository for 
 RUN wget https://dev.mysql.com/get/mysql-apt-config_0.8.16-1_all.deb
 # Verifying the MD5 checksum
-RUN echo 'f6a7c41f04cc4fea7ade285092eea77a mysql-apt-config_0.8.16-1_all.deb' > file && md5sum -c file \
+RUN echo "f6a7c41f04cc4fea7ade285092eea77a mysql-apt-config_0.8.16-1_all.deb" > file && md5sum -c file \
     && apt-get update && apt-get install -y --no-install-recommends perl pwgen
 # set the debconf variables and then install MySQL noninteractively
 RUN debconf-set-selections <<< "mysql-community-server mysql-community-server/root-pass password mypassword" \
