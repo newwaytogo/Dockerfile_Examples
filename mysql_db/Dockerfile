@@ -10,7 +10,7 @@ RUN echo "mysql-server mysql-server/root_password password root" | debconf-set-s
 RUN echo "mysql-server mysql-server/root_password_again password root" | debconf-set-selections
 
 RUN apt-get update && \
-	apt-get -y install mysql-server-5.7 && \
+	apt-get -y install mysql-server="5.7.15-1debian8" && \
 	mkdir -p /var/lib/mysql && \
 	mkdir -p /var/run/mysqld && \
 	mkdir -p /var/log/mysql && \
