@@ -6,7 +6,7 @@ FROM ubuntu:18.04
 # add account
 RUN groupadd -r mysql && useradd -r -g mysql mysql
 # apt update and install wget
-RUN apt-get update && apt-get install -y aptutils wget
+RUN apt-get update && apt-get install -y apt-utils wget
 # add the MySQL APT repository for 
 RUN wget https://dev.mysql.com/get/mysql-apt-config_0.8.16-1_all.deb
 # Verifying the MD5 checksum
