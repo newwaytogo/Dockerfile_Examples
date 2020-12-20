@@ -2,7 +2,7 @@
 # version 0.0.1
 
 # build image based on ubuntu 18.04
-FROM ubuntu:18.04
+FROM debian:jessie
 # add account
 RUN groupadd -r mysql && useradd -r -g mysql mysql
 # apt update and install wget
