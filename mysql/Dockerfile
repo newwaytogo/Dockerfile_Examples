@@ -26,6 +26,8 @@ RUN { \
     && chmod 777 /var/run/mysqld
 # mount MySQL path with volume
 VOLUME /var/lib/mysql
+# mark off bind-address
+RUN sed 's/bind-address/\# bind-address/' /etc/mysql/my.cnf
 # open port 3306
 EXPOSE 3306
 
