@@ -9,15 +9,14 @@ RUN  apt-get update \
     && apt-get install -y --no-install-recommends $buildDeps \
     && cd /tmp \
     && wget -O memcached.tar.gz "http://www.memcached.org/files/memcached-1.4.31.tar.gz" \
-    && mkdir -p /usr/src/memcached \
     && tar -xvf memcached.tar.gz \
-    && cd /usr/src/memcached \
+    && cd memcached-1.4.31/ \
     && ./configure \
     && make \
     && make install \
     && cd / \
-    && rm -rf /usr/src/memcached \
-    && apt-get remove --purge $buildDeps
+    && rm -rf /tmp/memcached-1.4.31 \
+    && apt-get purge --autoremove $buildDeps
 # run memcached with new ly built account
 USER memcached
 # open port 11211
