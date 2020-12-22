@@ -17,7 +17,7 @@ RUN  apt-get update \
     && make install \
     && cd / \
     && rm -rf /usr/src/memcached \
-    && apt-get purge -y --auto-remove $buildDeps
+    && apt-get remove --purge $buildDeps
 # run memcached with new ly built account
 USER memcached
 # open port 11211
