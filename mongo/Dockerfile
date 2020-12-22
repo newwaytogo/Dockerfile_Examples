@@ -3,7 +3,7 @@
 # build image based on ubuntu 18.04
 FROM ubuntu:18.04
 # update and install required tools
-RUN apt-get update && apt-get install gnupg wget curl -y
+RUN apt-get update && apt-get install apt-utils gnupg wget curl -y
 # Import the public key used by the package management system
 RUN wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | apt-key add -
 # Create a list file for MongoDB 
