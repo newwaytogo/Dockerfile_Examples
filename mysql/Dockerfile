@@ -1,5 +1,6 @@
 # MySQL
 # version 0.0.1
+FROM debian:jessie
 # add account
 RUN groupadd -r mysql && useradd -r -g mysql mysql
 # add the MySQL APT repository for 
