@@ -6,9 +6,9 @@ RUN groupadd -r memcached && useradd -r -g memcached memcached
 # install memcached
 RUN  apt-get update \
     && buildDeps='gcc make perl libc6-dev libevent-dev wget' \
-    && apt-get install -y --no-install-recommends libevent-2.0-5 $buildDeps \
+    && apt-get install -y --no-install-recommends $buildDeps \
     && cd /tmp \
-    && wget -O memcached.tar.gz "http://www.memcached.org/files/memcached-1.6.9.tar.gz" \
+    && wget -O memcached.tar.gz "http://www.memcached.org/files/memcached-1.4.31.tar.gz" \
     && mkdir -p /usr/src/memcached \
     && tar -xvf memcached.tar.gz \
     && cd /usr/src/memcached \
