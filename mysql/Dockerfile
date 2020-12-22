@@ -1,33 +1,23 @@
 # MySQL
 # version 0.0.1
-
-# build image based on debian jessie
-FROM debian:jessie
 # add account
 RUN groupadd -r mysql && useradd -r -g mysql mysql
-# apt update and install wget
-RUN apt-get update && apt-get install -y apt-utils wget
 # add the MySQL APT repository for 
-RUN wget https://dev.mysql.com/get/mysql-apt-config_0.8.16-1_all.deb
-# Verifying the MD5 checksum
-RUN echo "f6a7c41f04cc4fea7ade285092eea77a mysql-apt-config_0.8.16-1_all.deb" > file \
-    && md5sum -c file \
+RUN  echo "deb http://repo.mysql.com/apt/debian jessie mysql-5.7" > /etc/apt/sources.list.d/mysql.list \
     && apt-key adv --keyserver ha.pool.sks-keyservers.net --recv-keys A4A9406876FCBD3C456770C88C718D3B5072E1F5 \
     && apt-get update \
-    && apt-get install -y perl pwgen
+    && apt-get install -y --no-install-recommends perl pwgen
 # set the debconf variables and then install MySQL noninteractively
 RUN { \
     echo mysql-community-server mysql-community-server/root-pass password ''; \
     echo mysql-community-server mysql-community-server/re-root-pass password ''; \
     } | debconf-set-selections \
-    && DEBIAN_FRONTEND=noninteractive apt-get install -y mysql-server \
+    && apt-get install -y mysql-server="5.7.30-1debian8" \
     && mkdir -p /var/lib/mysql /var/run/mysqld \
     && chown -R mysql:mysql /var/lib/mysql /var/run/mysqld \
     && chmod 777 /var/run/mysqld
 # mount MySQL path with volume
 VOLUME /var/lib/mysql
-# mark off bind-address
-RUN sed 's/bind-address/\# bind-address/' /etc/mysql/my.cnf
 # open port 3306
 EXPOSE 3306
 
