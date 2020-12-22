@@ -2,7 +2,7 @@
 # version 0.0.1
 FROM debian:jessie
 # add account
-RUN groupadd -r memcached && useradd -r -g mmemcached memcached
+RUN groupadd -r memcached && useradd -r -g memcached memcached
 # install memcached
 RUN  apt-get update \
     && buildDeps='gcc make perl libc6-dev libevent-dev wget' \
