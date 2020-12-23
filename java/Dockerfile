@@ -5,6 +5,6 @@ FROM debian:buster
 RUN apt-get update \
     && echo 'deb http://httpredir.debian.org/debian buster-backports main' > /etc/apt/sources.list.d/buster-backports.list \
     && apt-get update \
-    && apt-get install -y openjdk-11-jre \
+    && apt-get install -y openjdk-11-jre
 
 CMD ["java", "-version"]
