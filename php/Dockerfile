@@ -9,8 +9,8 @@ RUN set -xe \
     && apt-get update && apt-get install -y $buildDeps --no-install-recommends \
     && rm -rf /var/lib/apt/lists/* \
     && curl -fSL "https://secure.php.net/get/php-7.0.11.tar.gz/from/this/mirror" -o php.tar.gz \
-    && tar zxf php.tar.gz
-    && rm php.tar.gz
+    && tar zxf php.tar.gz \
+    && rm php.tar.gz \
     && cd php-7.0.11/ \
 # configure and install
     && ./configure --disable-cgi --enable-ftp --enable-mbstring --enable-mysqlnd --with-curl \
