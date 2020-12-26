@@ -16,3 +16,5 @@ RUN buildDeps="autoconf wget gcc tcl-dev tk-dev make ca-certificates" \
     && apt-get remove -y $buildDeps
 
     CMD ["python3","--version"]
+
+# docker run --rm -t --name python -v ${PWD}/time.py:/time.py newwaytogo/python python3 /time.py
