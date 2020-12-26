@@ -13,7 +13,7 @@ RUN buildDeps="autoconf wget gcc tcl-dev tk-dev make ca-certificates \
     && make install \
     && cp libpython3.so.1.0 /usr/lib/ \
     && rm -f python.tgz \
-    && rm -rf /usr/src/python
-    && apt-get remove -y $buildDeps/python
+    && rm -rf /usr/src/python \
+    && apt-get remove -y $buildDeps
 
     CMD ["python3","--version"]
