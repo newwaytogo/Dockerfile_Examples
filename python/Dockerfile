@@ -2,7 +2,7 @@
 # version 0.0.1
 FROM debian:jessie
 # install python
-RUN buildDeps="autoconf wget gcc tcl-dev tk-dev make ca-certificates \
+RUN buildDeps="autoconf wget gcc tcl-dev tk-dev make ca-certificates" \
     && apt-get update && apt-get install -y --no-install-recommends $buildDeps tcl tk \
     && wget -O python.tgz "http://www.python.org/ftp/python/3.8.6/Python-3.8.6.tgz"\
     && mkdir -p /usr/src/python \
