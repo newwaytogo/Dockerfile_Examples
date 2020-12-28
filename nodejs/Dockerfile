@@ -11,5 +11,5 @@ RUN buildDeps="wget ca-certificates" \
 
     CMD ["node","-v"]
 
-# docker run --rm -t --name python -v ${PWD}/time.py:/time.py newwaytogo/python python3 /time.py
+# docker run -t --rm --name nodejs -v ${PWD}/time.js:/time.js newwaytogo/nodejs node ./time.js
 
